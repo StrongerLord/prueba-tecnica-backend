@@ -1,6 +1,16 @@
 from datetime import datetime
 from utils.db import db
 
+class User(db.Model):
+    __tablename__ = 'Users'
+
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True, unique=True, nullable=False)
+    username = db.Column(db.String(20), nullable=False, unique=True)
+    password = db.Column(db.String(128), nullable=False)
+
+    def __repr__(self):
+        return f'<User {self.username}>'
+
 class Priority(db.Model):
     __tablename__ = 'Priority'
     

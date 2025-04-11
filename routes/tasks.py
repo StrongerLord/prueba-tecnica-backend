@@ -2,11 +2,12 @@ from flask import Blueprint, request
 from models.models import Task
 from utils.db import db
 import datetime 
+from flask_jwt_extended import jwt_required
 
-# Rename the Blueprint variable to avoid conflict
 tasks_blueprint = Blueprint('tareas', __name__)
 
 @tasks_blueprint.route('/tareas', methods=['GET', 'POST'])
+@jwt_required()
 def list_or_create_tasks():
     if request.method == 'POST':
         try:
@@ -31,6 +32,7 @@ def list_or_create_tasks():
         return {'message':'Method not allowed'}, 405
     
 @tasks_blueprint.route('/tareas/<id>', methods=['GET', 'PUT', 'DELETE'])
+@jwt_required()
 def single_task(id):
     if request.method == 'GET':
         try: 
