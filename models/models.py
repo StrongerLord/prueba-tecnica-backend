@@ -47,6 +47,8 @@ class Task(db.Model):
             'id': self.id,
             'title': self.title,
             'description': self.description,
+            'priority_id': self.priority,
+            'status_id': self.status,
             'priority': self.priority_ref.description if self.priority_ref else None,
             'status': self.state_ref.description if self.state_ref else None,
             'creation_time': self.creation_time.isoformat(),
